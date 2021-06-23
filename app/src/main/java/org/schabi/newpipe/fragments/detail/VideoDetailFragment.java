@@ -251,6 +251,8 @@ public final class VideoDetailFragment
         restoreDefaultBrightness();
     }
 
+    private PlayerHolder playerHolder = PlayerHolder.getInstance();
+
 
     /*////////////////////////////////////////////////////////////////////////*/
 
@@ -360,9 +362,9 @@ public final class VideoDetailFragment
         // Stop the service when user leaves the app with double back press
         // if video player is selected. Otherwise unbind
         if (activity.isFinishing() && isPlayerAvailable() && player.videoPlayerSelected()) {
-            PlayerHolder.stopService(App.getApp());
+            playerHolder.stopService();
         } else {
-            PlayerHolder.removeListener();
+            playerHolder.removeListener();
         }
 
         PreferenceManager.getDefaultSharedPreferences(activity)
@@ -655,10 +657,10 @@ public final class VideoDetailFragment
         });
 
         setupBottomPlayer();
-        if (!PlayerHolder.bound) {
+        if (!playerHolder.bound) {
             setHeightThumbnail();
         } else {
-            PlayerHolder.startService(App.getApp(), false, this);
+            playerHolder.startService(false, this);
         }
     }
 
@@ -1088,7 +1090,7 @@ public final class VideoDetailFragment
 
         // See UI changes while remote playQueue changes
         if (!isPlayerAvailable()) {
-            PlayerHolder.startService(App.getApp(), false, this);
+            playerHolder.startService(false, this);
         }
 
         //  If a user watched video inside fullscreen mode and than chose another player
@@ -1118,7 +1120,7 @@ public final class VideoDetailFragment
     private void openNormalBackgroundPlayer(final boolean append) {
         // See UI changes while remote playQueue changes
         if (!isPlayerAvailable()) {
-            PlayerHolder.startService(App.getApp(), false, this);
+            playerHolder.startService(false, this);
         }
 
         final PlayQueue queue = setupPlayQueueForIntent(append);
@@ -1132,7 +1134,7 @@ public final class VideoDetailFragment
 
     private void openMainPlayer() {
         if (!isPlayerServiceAvailable()) {
-            PlayerHolder.startService(App.getApp(), autoPlayEnabled, this);
+            playerHolder.startService(autoPlayEnabled, this);
             return;
         }
         if (currentInfo == null) {
@@ -1150,7 +1152,7 @@ public final class VideoDetailFragment
 
         final Intent playerIntent = NavigationHelper
                 .getPlayerIntent(requireContext(), MainPlayer.class, queue, true, autoPlayEnabled);
-        activity.startService(playerIntent);
+        ContextCompat.startForegroundService(activity, playerIntent);
     }
 
     private void hideMainPlayer() {
@@ -1368,9 +1370,8 @@ public final class VideoDetailFragment
                             bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
                         }
                         // Rebound to the service if it was closed via notification or mini player
-                        if (!PlayerHolder.bound) {
-                            PlayerHolder.startService(
-                                    App.getApp(), false, VideoDetailFragment.this);
+                        if (!playerHolder.bound) {
+                            playerHolder.startService(false, VideoDetailFragment.this);
                         }
                         break;
                 }
@@ -2117,7 +2118,7 @@ public final class VideoDetailFragment
         if (currentWorker != null) {
             currentWorker.dispose();
         }
-        PlayerHolder.stopService(App.getApp());
+        playerHolder.stopService();
         setInitialData(0, null, "", null);
         currentInfo = null;
         updateOverlayData(null, null, null);
