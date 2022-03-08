@@ -14,6 +14,7 @@ import com.jakewharton.processphoenix.ProcessPhoenix;
 
 import org.acra.ACRA;
 import org.acra.config.CoreConfigurationBuilder;
+import org.conscrypt.Conscrypt;
 import org.schabi.newpipe.error.ReCaptchaActivity;
 import org.schabi.newpipe.extractor.NewPipe;
 import org.schabi.newpipe.extractor.downloader.Downloader;
@@ -30,6 +31,7 @@ import java.net.SocketException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.security.Security;
 
 import io.reactivex.rxjava3.exceptions.CompositeException;
 import io.reactivex.rxjava3.exceptions.MissingBackpressureException;
@@ -77,6 +79,7 @@ public class App extends MultiDexApplication {
         super.onCreate();
 
         app = this;
+        Security.insertProviderAt(Conscrypt.newProvider(), 1);
 
         if (ProcessPhoenix.isPhoenixProcess(this)) {
             Log.i(TAG, "This is a phoenix process! "
