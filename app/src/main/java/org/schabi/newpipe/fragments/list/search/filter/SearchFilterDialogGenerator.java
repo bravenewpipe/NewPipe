@@ -239,7 +239,7 @@ public class SearchFilterDialogGenerator extends BaseSearchFilterUiDialogGenerat
     }
 
     @NonNull
-    private View createSeparatorLine() {
+    protected SeparatorLineView createSeparatorLine() {
         return createSeparatorLine(clipFreeRightColumnLayoutParams(true));
     }
 

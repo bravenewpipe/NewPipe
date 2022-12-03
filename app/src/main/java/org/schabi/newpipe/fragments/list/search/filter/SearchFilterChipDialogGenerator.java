@@ -3,6 +3,7 @@
 package org.schabi.newpipe.fragments.list.search.filter;
 
 import android.content.Context;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridLayout;
 import android.widget.TextView;
@@ -37,6 +38,12 @@ public class SearchFilterChipDialogGenerator extends SearchFilterDialogGenerator
             final TextView filterLabel = createFilterLabel(filterGroup, layoutParams);
             globalLayout.addView(filterLabel);
             viewsWrapper.add(filterLabel);
+        } else { // if previous View is no separator line add a separator line here
+            if (globalLayout.getChildCount() == 0 || !isLastViewSeparatorView()) {
+                final SeparatorLineView view = createSeparatorLine();
+                globalLayout.addView(view);
+                viewsWrapper.add(view);
+            }
         }
 
         final ChipGroup chipGroup = new ChipGroup(context);
@@ -53,6 +60,11 @@ public class SearchFilterChipDialogGenerator extends SearchFilterDialogGenerator
         wrapperDelegate.put(filterGroup.getIdentifier(), viewsWrapper);
         globalLayout.addView(chipGroup);
         viewsWrapper.add(chipGroup);
+    }
+
+    private boolean isLastViewSeparatorView() {
+        final View lastView = globalLayout.getChildAt(globalLayout.getChildCount() - 1);
+        return lastView instanceof SeparatorLineView;
     }
 
     private ViewGroup.MarginLayoutParams setDefaultMarginInDp(

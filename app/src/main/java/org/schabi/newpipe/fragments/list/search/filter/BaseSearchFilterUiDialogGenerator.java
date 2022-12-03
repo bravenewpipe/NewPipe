@@ -42,9 +42,17 @@ public abstract class BaseSearchFilterUiDialogGenerator extends BaseSearchFilter
         return new BaseCreateSearchFilterUI.CreateSortFilterUI(this, context, logic);
     }
 
+    /**
+     * Create a View that acts as a separator between two other {@link View}-Elements.
+     *
+     * @param layoutParams this layout will be modified to have the height of 1 -> to have a
+     *                     the actual separator line.
+     * @return the created {@link SeparatorLineView}
+     */
     @NonNull
-    protected View createSeparatorLine(@NonNull final ViewGroup.LayoutParams layoutParams) {
-        final View separatorLine = new View(context);
+    protected SeparatorLineView createSeparatorLine(
+            @NonNull final ViewGroup.LayoutParams layoutParams) {
+        final SeparatorLineView separatorLine = new SeparatorLineView(context);
         separatorLine.setBackgroundColor(getSeparatorLineColorFromTheme());
         layoutParams.height = 1; // always set the separator to the height of 1
         separatorLine.setLayoutParams(layoutParams);
@@ -59,5 +67,18 @@ public abstract class BaseSearchFilterUiDialogGenerator extends BaseSearchFilter
         title.setTextSize(COMPLEX_UNIT_DIP, FONT_SIZE_TITLE_ITEMS_IN_DIP);
         title.setLayoutParams(layoutParams);
         return title;
+    }
+
+    /**
+     * A special view to separate two other {@link View}s.
+     * <p>
+     * class only needed to distinct this special view from other View based views.
+     * (eg. instanceof)
+     */
+    protected static final class SeparatorLineView extends View {
+
+        private SeparatorLineView(@NonNull final Context context) {
+            super(context);
+        }
     }
 }
