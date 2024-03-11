@@ -398,17 +398,20 @@ project.afterEvaluate {
 
 // keep the changed dependencies for BraveNewPipe more
 // separate in hope of not getting to many merge conflicts
+def okHttpVersion = "4.11.0"
+// for JavaNetCookieJar see https://github.com/bravenewpipe/NewPipeExtractor/issues/123
+project.getDependencies().implementation("com.squareup.okhttp3:okhttp-urlconnection:${okHttpVersion}")
 configurations.all {
     exclude group: 'com.github.TeamNewPipe', module: 'NewPipeExtractor'
 
     project.getDependencies().implementation("com.github.bravenewpipe:NewPipeExtractor:v0.23.1-2.1.8")
-    // for JavaNetCookieJar see https://github.com/bravenewpipe/NewPipeExtractor/issues/123
-    project.getDependencies().implementation("com.squareup.okhttp3:okhttp-urlconnection:3.12.13")
 
     if (it.getName().contains("braveKitkat") || it.getName().contains("BraveKitkat")) {
         resolutionStrategy.dependencySubstitution {
             substitute module("com.github.TeamNewPipe:NoNonsense-FilePicker") using module("com.github.bravenewpipe:NoNonsense-FilePicker:21d5c57") because "we need Sdk 19 support"
-            substitute module("com.squareup.okhttp3:okhttp") using module("com.squareup.okhttp3:okhttp:3.12.13") because "we need Sdk 19 support"
+            okHttpVersion= "3.12.13"
+            substitute module("com.squareup.okhttp3:okhttp") using module("com.squareup.okhttp3:okhttp:${okHttpVersion}") because "we need Sdk 19 support"
+            substitute module("com.squareup.okhttp3:okhttp-urlconnection") using module("com.squareup.okhttp3:okhttp-urlconnection:${okHttpVersion}") because "we need Sdk 19 support"
         }
     }
 }
