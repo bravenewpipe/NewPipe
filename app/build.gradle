@@ -97,7 +97,7 @@ android {
             android.sourceSets.braveConscrypt.res.srcDirs = android.sourceSets.brave.res.srcDirs
 
             dependencies {
-                implementation 'org.conscrypt:conscrypt-android:2.5.2'
+                braveConscryptImplementation 'org.conscrypt:conscrypt-android:2.5.2'
             }
         }
 
@@ -113,9 +113,9 @@ android {
             minSdk 19
 
             dependencies {
-                implementation 'androidx.multidex:multidex:2.0.1'
-                implementation 'org.conscrypt:conscrypt-android:2.5.2'
-                implementation "com.github.evermind-zz.OsExt:osext-stat:1.0.1"
+                braveLegacyImplementation 'androidx.multidex:multidex:2.0.1'
+                braveLegacyImplementation 'org.conscrypt:conscrypt-android:2.5.2'
+                braveLegacyImplementation "com.github.evermind-zz.OsExt:osext-stat:1.0.1"
             }
        }
     }
