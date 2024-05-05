@@ -31,18 +31,11 @@ public final class BraveStoredDirectoryHelper {
     }
 
     public static class BraveStructStatVfs {
-        /**
-         * @noinspection checkstyle:MemberName
-         */
+        @SuppressWarnings("checkstyle:MemberName")
         public final long f_bavail;
-        /**
-         * @noinspection checkstyle:MemberName
-         */
+        @SuppressWarnings("checkstyle:MemberName")
         public final long f_frsize;
 
-        /**
-         * @noinspection checkstyle:ParameterName
-         */
         BraveStructStatVfs(final com.github.evermindzz.osext.system.StructStatVfs stat) {
             this.f_bavail = stat.f_bavail;
             this.f_frsize = stat.f_frsize;
