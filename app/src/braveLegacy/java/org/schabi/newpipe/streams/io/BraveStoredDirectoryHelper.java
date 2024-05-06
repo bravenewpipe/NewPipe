@@ -8,13 +8,9 @@ import java.io.FileDescriptor;
 
 import androidx.annotation.RequiresApi;
 
-public final class BraveStoredDirectoryHelper {
+public class BraveStoredDirectoryHelper {
 
-    private BraveStoredDirectoryHelper() {
-
-    }
-
-    public static BraveStructStatVfs statvfs(final String path) throws ErrnoException {
+    protected BraveStructStatVfs statvfs(final String path) throws ErrnoException {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             return new BraveStructStatVfs(Os.statvfs(path));
         } else {
@@ -22,7 +18,7 @@ public final class BraveStoredDirectoryHelper {
         }
     }
 
-    public static BraveStructStatVfs fstatvfs(final FileDescriptor fd) throws ErrnoException {
+    protected BraveStructStatVfs fstatvfs(final FileDescriptor fd) throws ErrnoException {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             return new BraveStructStatVfs(Os.fstatvfs(fd));
         } else {

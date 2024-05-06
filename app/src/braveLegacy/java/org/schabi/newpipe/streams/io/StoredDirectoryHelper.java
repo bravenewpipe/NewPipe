@@ -33,7 +33,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class StoredDirectoryHelper {
+public class StoredDirectoryHelper extends BraveStoredDirectoryHelper {
     private static final String TAG = StoredDirectoryHelper.class.getSimpleName();
     public static final int PERMISSION_FLAGS = Intent.FLAG_GRANT_READ_URI_PERMISSION
             | Intent.FLAG_GRANT_WRITE_URI_PERMISSION;
@@ -190,12 +190,12 @@ public class StoredDirectoryHelper {
      */
     public long getFreeStorageSpace() {
         try {
-            final BraveStoredDirectoryHelper.BraveStructStatVfs stat;
+            final BraveStructStatVfs stat;
 
             if (ioTree != null) {
                 // non-SAF file, use statvfs with the path directly (also, `context` would be null
                 // for non-SAF files, so we wouldn't be able to call `getContentResolver` anyway)
-                stat = BraveStoredDirectoryHelper.statvfs(ioTree.toString());
+                stat = statvfs(ioTree.toString());
 
             } else {
                 // SAF file, we can't get a path directly, so obtain a file descriptor first
@@ -206,7 +206,7 @@ public class StoredDirectoryHelper {
                         return Long.MAX_VALUE;
                     }
                     final FileDescriptor fileDescriptor = parcelFileDescriptor.getFileDescriptor();
-                    stat = BraveStoredDirectoryHelper.fstatvfs(fileDescriptor);
+                    stat = fstatvfs(fileDescriptor);
                 }
             }
 
