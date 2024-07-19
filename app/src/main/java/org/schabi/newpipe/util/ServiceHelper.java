@@ -204,6 +204,16 @@ public final class ServiceHelper {
                 R.string.search_filters_newest_first /* Newest First */);
         LIBRARY_STRING_ID_TO_RES_ID_MAP.put(LibraryStringIds.SEARCH_FILTERS_OLDEST_FIRST,
                 R.string.search_filters_oldest_first /* Oldest First */);
+        LIBRARY_STRING_ID_TO_RES_ID_MAP.put(LibraryStringIds.SEARCH_FILTERS_SENSITIVITY_SAFE,
+                R.string.search_filters_sensitivity_safe /* Safe */);
+        LIBRARY_STRING_ID_TO_RES_ID_MAP.put(LibraryStringIds.SEARCH_FILTERS_SENSITIVITY_NORMAL,
+                R.string.search_filters_sensitivity_normal /* Normal */);
+        LIBRARY_STRING_ID_TO_RES_ID_MAP.put(LibraryStringIds.SEARCH_FILTERS_SENSITIVITY_NSFW,
+                R.string.search_filters_sensitivity_nsfw /* Nsfw */);
+        LIBRARY_STRING_ID_TO_RES_ID_MAP.put(LibraryStringIds.SEARCH_FILTERS_SENSITIVITY_NSFL,
+                R.string.search_filters_sensitivity_nsfl /* Nsfl */);
+        LIBRARY_STRING_ID_TO_RES_ID_MAP.put(LibraryStringIds.SEARCH_FILTERS_SENSITIVITY,
+                R.string.search_filters_sensitivity /* Sensitivity */);
     }
 
     private ServiceHelper() {

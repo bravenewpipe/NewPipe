@@ -16,6 +16,11 @@
     <string name="search_filters_feature_45_min_plus">Feature (45m+)</string>
     <string name="search_filters_newest_first">Newest First</string>
     <string name="search_filters_oldest_first">Oldest First</string>
+    <string name="search_filters_sensitivity_safe">Safe</string>
+    <string name="search_filters_sensitivity_normal">Normal</string>
+    <string name="search_filters_sensitivity_nsfw">Nsfw</string>
+    <string name="search_filters_sensitivity_nsfl">Nsfl</string>
+    <string name="search_filters_sensitivity">Sensitivity</string>
     <!-- end - strings for search filter feature (BraveNewPipe Services only) -->
 
     <!-- begin - strings for search filter feature (NewPipe Services only) -->
