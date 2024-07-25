@@ -70,7 +70,7 @@ android {
         // the amount of trailing zeros depends on the amount of digits the
         // defaultConfig.versionCode has -> we just prepend our increasing
         // versionCode before those zeros.
-        def braveVersionCode = 31000
+        def braveVersionCode = 32000
         // -> our versionName will be added as suffix to defaultConfig.versionName
         // We use major.minor.patch
         def braveVersionName = "2.2.0"
@@ -407,7 +407,7 @@ project.getDependencies().implementation("com.squareup.okhttp3:okhttp-urlconnect
 configurations.all {
     exclude group: 'com.github.TeamNewPipe', module: 'NewPipeExtractor'
 
-    project.getDependencies().implementation("com.github.bravenewpipe:NewPipeExtractor:v0.24.1-2.2.0")
+    project.getDependencies().implementation("com.github.bravenewpipe:NewPipeExtractor:v0.24.2-2.2.0")
 
     if (it.getName().contains("braveLegacy") || it.getName().contains("BraveLegacy")) {
         resolutionStrategy.dependencySubstitution {
