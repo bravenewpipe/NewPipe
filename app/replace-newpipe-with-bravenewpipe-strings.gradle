@@ -269,7 +269,6 @@ task prepareLegacyFlavor() {
     description = "move duplicated files from 'main' to tmp dir"
     doLast {
         prepareFilesForLegacy(false)
-        replaceNewVersionJsonUrl("kitkat")
         legacyFlavorGenerateDrawableNightForMainSettings()
     }
 }
@@ -279,7 +278,6 @@ task unprepareLegacyFlavor() {
     description = "move duplicated files from tmp dir 'main'"
     doLast {
         prepareFilesForLegacy(true)
-        replaceNewVersionJsonUrl("master")
         removeGeneratedDrawableNightForMainSettings()
     }
 }
