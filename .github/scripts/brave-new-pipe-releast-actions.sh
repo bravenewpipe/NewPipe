@@ -85,6 +85,30 @@ create_tagged_release() {
   popd
 }
 
+addAlternative() {
+        local L_ALTERNATIVE_FLAVOR="$1"
+        local L_URL_ALTERNATIVE_LEGACY="$2"
+        if [ "a${L_URL_ALTERNATIVE_LEGACY}b" != "ab" ] ; then
+            jq '.flavors.github.stable.alternative_apks += [{
+	            "alternative": "'${L_ALTERNATIVE_FLAVOR}'",
+	            "url": "'${L_URL_ALTERNATIVE_LEGACY}'"
+                    }]'
+        else
+            jq
+        fi
+}
+
+updateJsonFile() {
+    local L_URL_STABLE="$1"
+    local L_URL_ALTERNATIVE="$2"
+    local L_URL_ALTERNATIVE_LEGACY="$3"
+    cat $JSON_FILE \
+        | jq '.flavors.github.stable.version_code = '${VERSION_CODE}'' \
+        | jq '.flavors.github.stable.version = "'${VERSION_NAME}'"' \
+        | jq '.flavors.github.stable.apk = "'${L_URL_STABLE}'"' \
+        | jq '( .flavors.github.stable.alternative_apks[] | select(.alternative == "conscrypt") ).url |= "'${L_URL_ALTERNATIVE}'"' \
+        | addAlternative "braveLegacy" "${L_URL_ALTERNATIVE_LEGACY}"
+}
 create_json_file_and_create_tagged_release() {
     local L_BRANCH="$1"
     local L_URL_STABLE="$2"
@@ -93,12 +117,7 @@ create_json_file_and_create_tagged_release() {
     rm -rf "/tmp/${BNP_R_MGR_REPO}"
     git clone --branch "${L_BRANCH}" "https://${GITHUB_USER}:${GITHUB_SUPER_TOKEN}@github.com/${GITHUB_USER}/${BNP_R_MGR_REPO}.git" /tmp/${BNP_R_MGR_REPO}
     # update version{code,name} and download url
-    cat $JSON_FILE \
-        | jq '.flavors.github.stable.version_code = '${VERSION_CODE}'' \
-        | jq '.flavors.github.stable.version = "'${VERSION_NAME}'"' \
-        | jq '.flavors.github.stable.apk = "'${L_URL_STABLE}'"' \
-        | jq '( .flavors.github.stable.alternative_apks[] | select(.alternative == "conscrypt") ).url |= "'${L_URL_ALTERNATIVE}'"' \
-        > $TEMPFILE
+    updateJsonFile "$L_URL_STABLE" "$L_URL_ALTERNATIVE" "$L_URL_ALTERNATIVE_LEGACY" > "$TEMPFILE"
     mv $TEMPFILE $JSON_FILE
 
     create_tagged_release "$BNP_R_MGR_REPO" "$L_BRANCH" "\"version\": \"$VERSION_NAME\""
@@ -129,4 +148,4 @@ JSON_FILE=/tmp/${BNP_R_MGR_REPO}/api/data.json
 # We call kitkat stuff first as each call tags and delete same exising
 # tags before and we want the master branch to have the actual tag.
 create_json_file_and_create_tagged_release "kitkat" "$URL_LEGACY" "$URL_LEGACY"
-create_json_file_and_create_tagged_release "master" "$URL" "$URL_CONSCRYPT"
+create_json_file_and_create_tagged_release "master" "$URL" "$URL_CONSCRYPT" "$URL_LEGACY"
