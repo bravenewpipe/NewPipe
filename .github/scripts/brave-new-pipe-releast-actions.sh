@@ -3,7 +3,7 @@
 
 set -e
 
-if [[ $# -ne 2 ]]; then
+if [[ $# -lt 2 ]]; then
   echo "This needs a release tag and a apk file:"
   echo "e.g. $0 v0.22.0-1.0.5 /path/to/BraveNewPipe_v0.22.0-1.0.5.apk"
   exit 1
@@ -16,7 +16,7 @@ fi
 
 TAG=$1
 APK_FILE=$2
-CHANGE_LOG_FILE=$3
+CHANGE_LOG_FILE=$3 # optional
 
 BNP_R_MGR_REPO="bnp-r-mgr"
 
