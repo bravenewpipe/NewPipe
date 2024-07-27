@@ -16,6 +16,7 @@ fi
 
 TAG=$1
 APK_FILE=$2
+CHANGE_LOG_FILE=$3
 
 BNP_R_MGR_REPO="bnp-r-mgr"
 
@@ -98,6 +99,15 @@ addAlternative() {
         fi
 }
 
+addChangelog() {
+        if [ "a${CHANGE_LOG_FILE}b" != "ab" ] ; then
+            local L_CHANGELOG_ESCAPED="`jq -R -s  < "${CHANGE_LOG_FILE}"`"
+            jq ".flavors.github.stable.change_log = ${L_CHANGELOG_ESCAPED}"
+        else
+            jq
+        fi
+}
+
 updateJsonFile() {
     local L_URL_STABLE="$1"
     local L_URL_ALTERNATIVE="$2"
@@ -107,12 +117,15 @@ updateJsonFile() {
         | jq '.flavors.github.stable.version = "'${VERSION_NAME}'"' \
         | jq '.flavors.github.stable.apk = "'${L_URL_STABLE}'"' \
         | jq '( .flavors.github.stable.alternative_apks[] | select(.alternative == "conscrypt") ).url |= "'${L_URL_ALTERNATIVE}'"' \
-        | addAlternative "braveLegacy" "${L_URL_ALTERNATIVE_LEGACY}"
+        | addAlternative "braveLegacy" "${L_URL_ALTERNATIVE_LEGACY}" \
+        | addChangelog
 }
+
 create_json_file_and_create_tagged_release() {
     local L_BRANCH="$1"
     local L_URL_STABLE="$2"
     local L_URL_ALTERNATIVE="$3"
+    local L_URL_ALTERNATIVE_LEGACY="$4"
     # checkout json release file repo
     rm -rf "/tmp/${BNP_R_MGR_REPO}"
     git clone --branch "${L_BRANCH}" "https://${GITHUB_USER}:${GITHUB_SUPER_TOKEN}@github.com/${GITHUB_USER}/${BNP_R_MGR_REPO}.git" /tmp/${BNP_R_MGR_REPO}

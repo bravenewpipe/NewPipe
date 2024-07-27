@@ -178,7 +178,7 @@ jobs:
           RENAMED_APK: ${{ steps.renamed_apk.outputs.RENAMED_APK }}
           BUILD_TOOLS_VERSION: ${{ env.BUILD_TOOL_VERSION }}
         run: |
-          ./.github/scripts/brave-new-pipe-releast-actions.sh "$AUTOMATIC_RELEASES_TAG" "${RENAMED_APK}"
+          ./.github/scripts/brave-new-pipe-releast-actions.sh "$AUTOMATIC_RELEASES_TAG" "${RENAMED_APK}" "customChangeLogFile"
 
       # evermind - name: pack all app dir
       # evermind   run: tar czpf apper.tgz app
