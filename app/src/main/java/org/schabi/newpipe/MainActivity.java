@@ -265,6 +265,7 @@ public class MainActivity extends AppCompatActivity {
         drawerLayoutBinding.navigation.getMenu()
                 .add(R.id.menu_options_about_group, ITEM_ID_ABOUT, ORDER, R.string.tab_about)
                 .setIcon(R.drawable.ic_info_outline);
+        BraveMainActivityHelper.addBraveDrawers(drawerLayoutBinding, ORDER);
     }
 
     private boolean drawerItemSelected(final MenuItem item) {
@@ -341,6 +342,7 @@ public class MainActivity extends AppCompatActivity {
                 NavigationHelper.openAbout(this);
                 break;
         }
+        BraveMainActivityHelper.onSelectedItemInDrawer(this, item);
     }
 
     private void setupDrawerHeader() {
