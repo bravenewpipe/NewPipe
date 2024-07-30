@@ -342,6 +342,10 @@ dependencies {
     // Date and time formatting
     implementation "org.ocpsoft.prettytime:prettytime:5.0.7.Final"
 
+    // apk upgrade dialog/downloader
+    implementation 'com.github.evermind-zz.AppUpdater:app-dialog:1.2.0-1.2.0'
+    implementation 'com.github.evermind-zz.AppUpdater:app-updater:1.2.0-1.2.0'
+
 /** Debugging **/
     // Memory leak detection
     debugImplementation "com.squareup.leakcanary:leakcanary-object-watcher-android:${leakCanaryVersion}"

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- BraveUpgradeActivity is only used as container for the upgrade dialog
+         -> therefore it should not be visible at all -->
+    <style name="Theme.Transparent" parent="Theme.AppCompat.Dialog">
+        <item name="windowBackground">@color/transparent_background_color</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+    </style>
+</resources>

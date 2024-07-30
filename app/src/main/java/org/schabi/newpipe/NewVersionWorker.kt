@@ -38,7 +38,8 @@ class NewVersionWorker(
     private fun compareAppVersionAndShowNotification(
         versionName: String,
         apkLocationUrl: String?,
-        versionCode: Int
+        versionCode: Int,
+        changeLog: String? // from BraveNewPipe's json
     ) {
         if (BuildConfig.VERSION_CODE >= versionCode) {
             if (inputData.getBoolean(IS_MANUAL, false)) {
@@ -53,9 +54,27 @@ class NewVersionWorker(
             return
         }
 
-        // A pending intent to open the apk location url in the browser.
-        val intent = Intent(Intent.ACTION_VIEW, apkLocationUrl?.toUri())
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        val intent: Intent
+        // begin BraveNewPipe - prepare to launch update dialog if allowed
+        if (BraveNewVersionWorkerHelper.isBraveUpdateBehaviourEnabled(applicationContext)) {
+            intent = BraveNewVersionWorkerHelper.getUpgradeActivityIntent(
+                applicationContext,
+                versionName,
+                apkLocationUrl,
+                changeLog
+            )
+
+            if (inputData.getBoolean(IS_MANUAL, false)) {
+                applicationContext.startActivity(intent)
+                return
+            }
+            // end BraveNewPipe - prepare to launch update dialog if allowed
+        } else {
+            // A pending intent to open the apk location url in the browser.
+            intent = Intent(Intent.ACTION_VIEW, apkLocationUrl?.toUri())
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        }
+
         val pendingIntent = PendingIntentCompat.getActivity(
             applicationContext, 0, intent, 0, false
         )
@@ -118,12 +137,14 @@ class NewVersionWorker(
         // Parse the json from the response.
         try {
             val newpipeVersionInfo = BraveNewVersionWorkerHelper.getVersionInfo(
-                    response.responseBody(), BuildConfig.FLAVOR)
+                response.responseBody(), BuildConfig.FLAVOR
+            )
 
             val versionName = newpipeVersionInfo.getString("version")
             val versionCode = newpipeVersionInfo.getInt("version_code")
             val apkLocationUrl = newpipeVersionInfo.getString("apk")
-            compareAppVersionAndShowNotification(versionName, apkLocationUrl, versionCode)
+            val changeLog = newpipeVersionInfo.getString("change_log")
+            compareAppVersionAndShowNotification(versionName, apkLocationUrl, versionCode, changeLog)
         } catch (e: JsonParserException) {
             // Most likely something is wrong in data received from NEWPIPE_API_URL.
             // Do not alarm user and fail silently.

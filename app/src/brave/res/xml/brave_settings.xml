@@ -14,4 +14,12 @@
         android:defaultValue="@array/brave_settings_host_replace_default_values"
         />
 
+    <SwitchPreferenceCompat
+        android:defaultValue="false"
+        android:key="@string/brave_settings_update_behaviour_key"
+        android:summary="@string/brave_settings_update_behaviour_description"
+        android:title="@string/brave_settings_update_behaviour_title"
+        app:singleLineTitle="false"
+        app:iconSpaceReserved="false" />
+
 </PreferenceScreen>

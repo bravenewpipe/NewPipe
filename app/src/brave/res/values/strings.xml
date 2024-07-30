@@ -106,5 +106,16 @@
     <string name="brave_settings_host_replace_summary">In some countries some hosts are restricted but can be replaced by others.</string>
     <!-- end - settings for replacing host domain names -->
 
+    <!-- begin - settings for update behaviour - aka show dialog and download the apk internally -->
+    <string name="brave_settings_update_behaviour_key">brave_settings_update_behaviour_key</string>
+    <string name="brave_settings_update_behaviour_description"><![CDATA[use internal downloader to fetch the newest version of BraveNewPipe. (A dialog will popup once you click on the notification or on the check manual button in settings -> updates)]]></string>
+    <string name="brave_settings_update_behaviour_title">Update Behaviour</string>
+    <!-- end - settings for update behaviour - aka show dialog and download the apk internally -->
+
     <!-- end - BraveNewPipe settings page -->
+
+    <!-- begin BraveNewPipe Apk upgrade dialog -->
+    <string name="update">Update</string>
+    <string name="update_new_version">New version %s</string>
+    <!-- end BraveNewPipe Apk upgrade dialog -->
 </resources>

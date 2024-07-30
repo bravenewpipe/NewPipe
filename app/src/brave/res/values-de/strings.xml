@@ -78,4 +78,9 @@
     <string name="search_filters_this_year">Dieses Jahr</string>
     <string name="search_filters_yes">Ja</string>
     <!-- end - strings for search filter feature (NewPipe Services only) -->
+
+    <!-- begin BraveNewPipe Apk upgrade dialog -->
+    <string name="update">Aktualisieren</string>
+    <string name="update_new_version">Neue Version: %s</string>
+    <!-- end BraveNewPipe Apk upgrade dialog -->
 </resources>
