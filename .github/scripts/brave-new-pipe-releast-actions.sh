@@ -155,11 +155,4 @@ VERSION_CODE="$($AAPT d badging $APK_FILE | grep -Po "(?<=\sversionCode=')([0-9.
 TEMPFILE="$(mktemp  -p /tmp -t sdflhXXXXXXXXX)"
 JSON_FILE=/tmp/${BNP_R_MGR_REPO}/api/data.json
 
-# We have two different json files for now:
-# The first is used within the flavors brave and braveConscrypt
-# and the second is used in braveLegacy. The json files
-# are stored in the same repo but in different branches.
-# We call kitkat stuff first as each call tags and delete same exising
-# tags before and we want the master branch to have the actual tag.
-create_json_file_and_create_tagged_release "kitkat" "$URL_LEGACY" "$URL_LEGACY"
 create_json_file_and_create_tagged_release "master" "$URL" "$URL_CONSCRYPT" "$URL_LEGACY"
