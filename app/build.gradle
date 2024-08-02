@@ -70,10 +70,10 @@ android {
         // the amount of trailing zeros depends on the amount of digits the
         // defaultConfig.versionCode has -> we just prepend our increasing
         // versionCode before those zeros.
-        def braveVersionCode = 33000
+        def braveVersionCode = 34000
         // -> our versionName will be added as suffix to defaultConfig.versionName
         // We use major.minor.patch
-        def braveVersionName = "2.2.1"
+        def braveVersionName = "2.3.0"
 
         sponsorblock { // only for strings of sponsorblock stuff
             dimension 'default'

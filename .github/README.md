@@ -32,6 +32,9 @@ Feel free to suggest which alternative platforms should be included. Any contrib
 - searchfilters: in the action menu of the search page you can now change
   the search behavior for the actual search. The supported content/sort
   filters depend on the service. More information [PR TeamNewPipe#8837](https://github.com/TeamNewPipe/NewPipe/pull/8837)
+- Integrated updater feature. BraveNewPipe will download a new version and act as an installer
+  source (you have to allow that). To enable that feature go to:
+  `Settings -> 'BraveNewPipe Settings' -> 'Update Behaviour'`
 
 ## Reporting bugs
 Most problems with BraveNewPipe should be reported to the NewPipeExtractor
