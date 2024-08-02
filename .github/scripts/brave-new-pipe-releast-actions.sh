@@ -116,7 +116,8 @@ updateJsonFile() {
         | jq '.flavors.github.stable.version_code = '${VERSION_CODE}'' \
         | jq '.flavors.github.stable.version = "'${VERSION_NAME}'"' \
         | jq '.flavors.github.stable.apk = "'${L_URL_STABLE}'"' \
-        | jq '( .flavors.github.stable.alternative_apks[] | select(.alternative == "conscrypt") ).url |= "'${L_URL_ALTERNATIVE}'"' \
+        | jq '.flavors.github.stable.alternative_apks = []' \
+        | addAlternative "braveConscrypt" "${L_URL_ALTERNATIVE}" \
         | addAlternative "braveLegacy" "${L_URL_ALTERNATIVE_LEGACY}" \
         | addChangelog
 }
