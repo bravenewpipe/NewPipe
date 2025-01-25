@@ -19,6 +19,9 @@
 
 package org.schabi.newpipe.views;
 
+import static org.schabi.newpipe.MainActivity.DEBUG;
+import static java.lang.annotation.RetentionPolicy.SOURCE;
+
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.os.Build;
@@ -31,17 +34,14 @@ import androidx.annotation.IntDef;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
+import com.evernote.android.state.State;
+import com.livefront.bridge.Bridge;
+
 import org.schabi.newpipe.ktx.ViewUtils;
 
 import java.lang.annotation.Retention;
 import java.util.ArrayList;
 import java.util.List;
-
-import icepick.Icepick;
-import icepick.State;
-
-import static java.lang.annotation.RetentionPolicy.SOURCE;
-import static org.schabi.newpipe.MainActivity.DEBUG;
 
 /**
  * A view that can be fully collapsed and expanded.
@@ -210,12 +210,12 @@ public class CollapsibleView extends LinearLayout {
     @Nullable
     @Override
     public Parcelable onSaveInstanceState() {
-        return Icepick.saveInstanceState(this, super.onSaveInstanceState());
+        return Bridge.saveInstanceState(this, super.onSaveInstanceState());
     }
 
     @Override
     public void onRestoreInstanceState(final Parcelable state) {
-        super.onRestoreInstanceState(Icepick.restoreInstanceState(this, state));
+        super.onRestoreInstanceState(Bridge.restoreInstanceState(this, state));
 
         ready();
     }
