@@ -8,6 +8,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.evernote.android.state.State;
+
 import org.schabi.newpipe.R;
 import org.schabi.newpipe.fragments.list.search.filter.SearchFilterLogic;
 import org.schabi.newpipe.fragments.list.search.filter.SearchFilterUIOptionMenu;
@@ -15,7 +17,6 @@ import org.schabi.newpipe.fragments.list.search.filter.SearchFilterUIOptionMenu;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
-import icepick.State;
 
 /**
  * Fragment that hosts the action menu based filter 'dialog'.

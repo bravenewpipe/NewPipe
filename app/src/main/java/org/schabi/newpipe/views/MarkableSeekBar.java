@@ -11,8 +11,6 @@ import android.util.AttributeSet;
 import androidx.appcompat.widget.AppCompatSeekBar;
 import androidx.core.content.ContextCompat;
 
-import org.schabi.newpipe.R;
-
 import java.util.ArrayList;
 
 public class MarkableSeekBar extends AppCompatSeekBar {
@@ -78,7 +76,7 @@ public class MarkableSeekBar extends AppCompatSeekBar {
             final Drawable markerDrawable =
                     ContextCompat.getDrawable(
                             getContext(),
-                            R.drawable.abc_scrubber_primary_mtrl_alpha);
+                            androidx.appcompat.R.drawable.abc_scrubber_primary_mtrl_alpha);
 
             final PorterDuffColorFilter colorFilter =
                     new PorterDuffColorFilter(seekBarMarker.color, PorterDuff.Mode.SRC_IN);

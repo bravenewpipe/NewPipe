@@ -5,8 +5,6 @@ package org.schabi.newpipe.fragments.list.search.filter;
 import android.content.Context;
 import android.util.TypedValue;
 
-import org.schabi.newpipe.R;
-
 import androidx.annotation.NonNull;
 
 import static org.schabi.newpipe.fragments.list.search.filter.SearchFilterLogic.ICreateUiForFiltersWorker;
@@ -48,7 +46,7 @@ public abstract class BaseSearchFilterUiGenerator {
 
     protected int getSeparatorLineColorFromTheme() {
         final TypedValue value = new TypedValue();
-        context.getTheme().resolveAttribute(R.attr.colorAccent, value, true);
+        context.getTheme().resolveAttribute(android.R.attr.colorAccent, value, true);
         return value.data;
     }
 
