@@ -587,7 +587,8 @@ public final class ListHelper {
                     ? null
                     : videoStreams.get(idx).getFormat();
             final String resolution = videoStreams.get(idx).getResolution();
-            final String resolutionNoRefresh = resolution.replaceAll("p\\d+$", "p");
+            final String resolutionNoRefresh = BraveListHelper.extractResolution(resolution,
+                    resolution.replaceAll("p\\d+$", "p"));
 
             if (format == targetFormat && resolution.equals(targetResolution)) {
                 fullMatchIndex = idx;
