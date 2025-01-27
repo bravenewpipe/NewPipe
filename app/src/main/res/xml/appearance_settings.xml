@@ -59,7 +59,7 @@
         app:iconSpaceReserved="false" />
 
     <ListPreference
-        android:defaultValue="@string/search_filter_ui_dialog_key"
+        android:defaultValue="@string/search_filter_ui_default_key"
         android:entries="@array/search_filter_ui_description"
         android:entryValues="@array/search_filter_ui_values"
         android:key="@string/search_filter_ui_key"

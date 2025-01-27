@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources translatable="false">
     <string name="search_filter_ui_value">@string/search_filter_ui_chip_dialog_key</string>
+    <string name="search_filter_ui_default_key">@string/search_filter_ui_chip_dialog_key</string>
 
     <string-array name="search_filter_ui_values">
         <!-- not working on KitKat <item>@string/search_filter_ui_dialog_key</item>-->

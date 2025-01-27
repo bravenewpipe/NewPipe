@@ -1426,6 +1426,7 @@
     <string name="search_filter_ui_option_menu_style_key">style</string>
     <string name="search_filter_ui_option_menu_legacy_key">legacy</string>
     <string name="search_filter_ui_chip_dialog_key">chip</string>
+    <string name="search_filter_ui_default_key">@string/search_filter_ui_dialog_key</string>
 
     <string-array name="search_filter_ui_values">
         <item>@string/search_filter_ui_dialog_key</item>
