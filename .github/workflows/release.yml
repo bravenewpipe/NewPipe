@@ -128,9 +128,9 @@ jobs:
       - name: Branch name
         id: branch_name
         run: |
-          echo ::set-output name=SOURCE_NAME::${GITHUB_REF#refs/*/}
-          echo ::set-output name=SOURCE_BRANCH::${GITHUB_REF#refs/heads/}
-          echo ::set-output name=SOURCE_TAG::${GITHUB_REF#refs/tags/}
+          echo "SOURCE_NAME=${GITHUB_REF#refs/*/}" >> $GITHUB_OUTPUT
+          echo "SOURCE_BRANCH=${GITHUB_REF#refs/heads/}" >> $GITHUB_OUTPUT
+          echo "SOURCE_TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
       # evermind
       - name: rename apk and create checksum
         id: renamed_apk
@@ -142,17 +142,17 @@ jobs:
           SIGNED_APK_CONSCRYPT: ${{ steps.sign_app_conscrypt.outputs.signedReleaseFile }}
           SIGNED_APK_LEGACY: ${{ steps.sign_app_legacy.outputs.signedReleaseFile }}
         run: |
-          echo ::set-output name=RENAMED_APK::${SIGNED_APK%/*}/BraveNewPipe_${SOURCE_TAG}.apk
+          echo "RENAMED_APK=${SIGNED_APK%/*}/BraveNewPipe_${SOURCE_TAG}.apk" >> $GITHUB_OUTPUT
           cp ${SIGNED_APK} ${SIGNED_APK%/*}/BraveNewPipe_${SOURCE_TAG}.apk
           cd ${SIGNED_APK%/*}
           sha256sum BraveNewPipe_${SOURCE_TAG}.apk > BraveNewPipe_${SOURCE_TAG}.apk.sha256
           cd -
-          echo ::set-output name=RENAMED_APK_CONSCRYPT::${SIGNED_APK_CONSCRYPT%/*}/BraveNewPipe_conscrypt_${SOURCE_TAG}.apk
+          echo "RENAMED_APK_CONSCRYPT=${SIGNED_APK_CONSCRYPT%/*}/BraveNewPipe_conscrypt_${SOURCE_TAG}.apk" >> $GITHUB_OUTPUT
           cp ${SIGNED_APK_CONSCRYPT} ${SIGNED_APK_CONSCRYPT%/*}/BraveNewPipe_conscrypt_${SOURCE_TAG}.apk
           cd ${SIGNED_APK_CONSCRYPT%/*}
           sha256sum BraveNewPipe_conscrypt_${SOURCE_TAG}.apk > BraveNewPipe_conscrypt_${SOURCE_TAG}.apk.sha256
           cd -
-          echo ::set-output name=RENAMED_APK_LEGACY::${SIGNED_APK_LEGACY%/*}/BraveNewPipe_legacy_${SOURCE_TAG}.apk
+          echo "RENAMED_APK_LEGACY=${SIGNED_APK_LEGACY%/*}/BraveNewPipe_legacy_${SOURCE_TAG}.apk" >> $GITHUB_OUTPUT
           cp ${SIGNED_APK_LEGACY} ${SIGNED_APK_LEGACY%/*}/BraveNewPipe_legacy_${SOURCE_TAG}.apk
           cd ${SIGNED_APK_LEGACY%/*}
           sha256sum BraveNewPipe_legacy_${SOURCE_TAG}.apk > BraveNewPipe_legacy_${SOURCE_TAG}.apk.sha256
