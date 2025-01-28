@@ -106,20 +106,20 @@ jobs:
           BUILD_TOOLS_VERSION: ${{ env.BUILD_TOOL_VERSION }}
 
       - name: Upload brave artifact APK
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: brave
           path: ${{steps.sign_app.outputs.signedReleaseFile}}
           #path: app/build/outputs/apk/brave/release/*.apk
 
       - name: Upload braveConscrypt artifact APK
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: braveConscrypt
           path: ${{steps.sign_app_conscrypt.outputs.signedReleaseFile}}
 
       - name: Upload braveLegacy artifact APK
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: braveLegacy
           path: ${{steps.sign_app_legacy.outputs.signedReleaseFile}}
