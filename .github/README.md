@@ -13,7 +13,7 @@ Currently there are 3 variants:
 - `BravePipe_v${TAG}.apk`: version most people want to install.
 - `BravePipe_conscrypt_v${TAG}.apk`: like the first but with lastest TLS library aka conscrypt
 - `BravePipe_legacy_v${TAG}.apk`: based on same code like above variants but with some checks to
-  make it work on SDK 19 aka Kitkat. [BravePipeLegacy](https://github.com/bravenewpipe/BravePipeLegacy)
+  make it work on SDK 19 aka Kitkat. The separate repository [BraveNewPipeLegacy](https://github.com/bravepipeproject/BraveNewPipeLegacy)
   is dumped instead. I hope this approach is more reliable and less a burden to maintain.
 
 ### APK Info
